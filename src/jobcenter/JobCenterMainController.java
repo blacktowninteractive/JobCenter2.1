@@ -41,7 +41,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -121,11 +120,11 @@ public class JobCenterMainController implements Initializable, ScreenController 
     //my ip 192.168.1.108
     //jdbc:mysql://hostname:port/databasename
     // private static String url = "jdbc:mysql://localhost/jobcenter";
-   public static String url = "jdbc:mysql://192.168.1.104/jobcenter";
-    public static String userdb = "vangfc";//Username of database  
-    public static String passdb = "password";//Password of database
+    public static String url = "jdbc:mysql://192.168.1.112/jobcenter";
+    public static String userdb = "videoPipe";//Username of database  
+    public static String passdb = "Vps1566!!";//Password of database
     //public static String url = "jdbc:mysql://192.168.1.112/jobcenter";
-    //public static String userdb = "videoPipe";//Username of database  
+    // public static String userdb = "videoPipe";//Username of database  
     //public static String passdb = "Vps1566!!";//Password of database
     public static String scrollingTxt = "", fullNameUser = "";
     String emailList;
@@ -182,7 +181,6 @@ public class JobCenterMainController implements Initializable, ScreenController 
             scrollingTxtSet, dateTracking, notesTracking, empEditFname,
             empEditLname, empEditAddress, empEditPhone, empEditEmail;
 
-
     public PasswordField newPwd;
 
     public static String jobTitleStr = "", jobNameStr = "", custJobNumStr = "", custJobNameStr = "", startDateStr = "", startTimeStr = "",
@@ -192,7 +190,6 @@ public class JobCenterMainController implements Initializable, ScreenController 
     public Text setCustPhone, setCustName, setCustCity, setCustState, setCustPOC, setCustCompPhone,
             setCustFax, setCustAddr, setCustZip, useridInfor, nameInfor, emailInfor, phoneInfor, usernameInfor,
             currentScrolling, nameTracker, userNameLoggedOn;
-
 
     public ComboBox screenList, taskComboBox, jobStatus, empListUsr, selEmpEmail, selEmpAdmin, trackingBox;
     ObservableList<String> admin = FXCollections.observableArrayList(
@@ -228,7 +225,6 @@ public class JobCenterMainController implements Initializable, ScreenController 
             empModSStuffList = new ArrayList<String>(),
             allEmpInfo = new ArrayList<String>();
 
-
     ObservableList<String> vehList11 = FXCollections.observableArrayList(vehList);
     ObservableList<String> empSelect = FXCollections.observableArrayList(empListSel);
     ObservableList<String> custListingObs = FXCollections.observableArrayList(custList);
@@ -236,8 +232,7 @@ public class JobCenterMainController implements Initializable, ScreenController 
     ObservableList<String> empEmailObs = FXCollections.observableArrayList(empEmailList);
     ObservableList<String> adminObs = FXCollections.observableArrayList(adminNameBox);
     ObservableList<String> empSelected = FXCollections.observableArrayList(empListSelected);
-ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSStuffList);
- 
+    ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSStuffList);
 
     TextField jTitleField = new TextField(),
             jCustField = new TextField(),
@@ -270,8 +265,8 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         //emp_shop.setCellValueFactory(new PropertyValueFactory<employee, String>("shpEmp55"));
 
         employeeTable.setItems(populateDB());
-        employeeTable.setEditable(true); 
-        
+        employeeTable.setEditable(true);
+
         jname.setCellValueFactory(new PropertyValueFactory<editHistClass, String>("jobName"));
         dte.setCellValueFactory(new PropertyValueFactory<editHistClass, String>("date"));
         fnme.setCellValueFactory(new PropertyValueFactory<editHistClass, String>("firstName"));
@@ -327,7 +322,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         zip.setText("");
         status = "";
 
-        fullNameUser = ""; 
+        fullNameUser = "";
         createJobToolbar.setVisible(false);
         editJobToolbar.setVisible(false);
 
@@ -339,10 +334,10 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
         //  initialize user settings text
         initializeText();
-        
+
         //get username
         userNameLoggedOn.setText(fullNameUser);
-        
+
     }
 
     public int howManyRowsPrinter() {
@@ -541,10 +536,10 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
     private void refreshEmp() {
         try {
-            
+
             empListSel = new ArrayList<String>();
             empModSStuffList.clear();
-            
+
             st = conn.createStatement();
             rs = st.executeQuery("select fname,lname from employees order by fname;");
             while (rs.next()) {
@@ -552,21 +547,19 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 empListSel.add(rs.getString(1) + " " + rs.getString(2));
                 empModSStuffList.add(rs.getString(1) + " " + rs.getString(2));
             }
- 
+
             ObservableList<String> empLister11232 = FXCollections.observableArrayList(empListSel);
             empModStuff = FXCollections.observableArrayList(empModSStuffList);
-            
+
             employeeSelect.setItems(empLister11232);
             //update items for employees
             // employeeSelect.setItems(empLister);
-            empAddJobView.setItems(empLister11232); 
+            empAddJobView.setItems(empLister11232);
             //empIInfoEditView.setItems(empLister11232);
-            
- 
+
         } catch (Exception e) {
             System.err.println(e);
         }
-
 
     }
 
@@ -1624,24 +1617,23 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                                 //      managerPane.setVisible(true);
                                 //  }
                                 if (new_val == "People") {
-                                    
-                                    
+
                                     refreshEmp();
-                                    
+
                                     empIInfoEditView.setItems(empModStuff);
                                     empIInfoEditView.setOnMouseClicked(new EventHandler<MouseEvent>() {
- 
+
                                         @Override
                                         public void handle(MouseEvent event) {
                                             System.out.println("clicked on " + empIInfoEditView.getSelectionModel().getSelectedItem());
-                                            
+
                                             //create a list that holds in order
                                             //fname, lname, addy, phone, email, and unique eid from emoloyees
-                                           String qryForEmpInfo = "select * from employees where fname = '" + empIInfoEditView.getSelectionModel().getSelectedItem().toString().substring(0, empIInfoEditView.getSelectionModel().getSelectedItem().toString().indexOf(" "))
-                                            + "' and lname = '" + empIInfoEditView.getSelectionModel().getSelectedItem().toString().substring(empIInfoEditView.getSelectionModel().getSelectedItem().toString().indexOf(" ")+1, empIInfoEditView.getSelectionModel().getSelectedItem().toString().length()) + "'";
- 
-                                           allEmpInfo.clear();
-                                           
+                                            String qryForEmpInfo = "select * from employees where fname = '" + empIInfoEditView.getSelectionModel().getSelectedItem().toString().substring(0, empIInfoEditView.getSelectionModel().getSelectedItem().toString().indexOf(" "))
+                                            + "' and lname = '" + empIInfoEditView.getSelectionModel().getSelectedItem().toString().substring(empIInfoEditView.getSelectionModel().getSelectedItem().toString().indexOf(" ") + 1, empIInfoEditView.getSelectionModel().getSelectedItem().toString().length()) + "'";
+
+                                            allEmpInfo.clear();
+
                                             try {
                                                 st = conn.createStatement();
                                                 rs = st.executeQuery(qryForEmpInfo);
@@ -1654,21 +1646,19 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                                                     allEmpInfo.add(rs.getString(5));
                                                     allEmpInfo.add(rs.getString(6));
                                                 }
- 
+
                                             } catch (Exception e) {
                                                 System.err.print(e);
-                                            }      
+                                            }
                                             empEditFname.setText(allEmpInfo.get(0));
                                             empEditLname.setText(allEmpInfo.get(1));
                                             empEditAddress.setText(allEmpInfo.get(2));
                                             empEditPhone.setText(allEmpInfo.get(3));
                                             empEditEmail.setText(allEmpInfo.get(4));
-                                            
-                                        
+
                                         }
                                     });
 
-                                    
                                     employeePane.setVisible(true);
                                     tracking = FXCollections.observableList(new ArrayList<String>());
 
@@ -2492,22 +2482,22 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         String dateToday = (dateFormat.format(cal.getTime()));
         Text labelDate = labelDate = new Text(dateToday);
 
-        label.setStyle("-fx-font-size: 10;");
-        label1.setStyle("-fx-font-size: 10;");
-        label2.setStyle("-fx-font-size: 10;");
-        label3.setStyle("-fx-font-size: 10;");
-        label4.setStyle("-fx-font-size: 10;");
+        label.setStyle("-fx-font-size: 9;");
+        label1.setStyle("-fx-font-size: 9;");
+        label2.setStyle("-fx-font-size: 9;");
+        label3.setStyle("-fx-font-size: 9;");
+        label4.setStyle("-fx-font-size: 9;");
 
         labelTitle.setStyle("-fx-font-size: 16;");
         labelTitle.setY(25);
         labelTitle.setX(10);
         labelDate.setStyle("-fx-font-size: 15;");
         labelDate.setY(25);
-        labelDate.setX(195);
+        labelDate.setX(215);
         labelComp.setStyle("-fx-font-size: 16;");
         labelComp.setY(25);
-        labelComp.setX(965);
-        printScreen.setLayoutX(277);
+        labelComp.setX(925);
+        printScreen.setLayoutX(297);
         printScreen.setLayoutY(7);
 
         gridpane.add(label, 0, 0); // column=2 row=1        
@@ -2525,7 +2515,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             row.setValignment(VPos.CENTER);
             String nameLabel = "Person " + i;
             Text tmpTxt = new Text(nameLabel);
-            tmpTxt.setStyle("-fx-font-size: 10;");
+            tmpTxt.setStyle("-fx-font-size: 9;");
 
             gridpane.getRowConstraints().add(row);
             gridpane.add(tmpTxt, 0, numLocation);
@@ -2539,7 +2529,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             row.setValignment(VPos.CENTER);
             String nameLabel = "Veh/Equip " + i;
             Text tmpTxt = new Text(nameLabel);
-            tmpTxt.setStyle("-fx-font-size: 10;");
+            tmpTxt.setStyle("-fx-font-size: 9;");
 
             gridpane.getRowConstraints().add(row);
             gridpane.add(tmpTxt, 0, numLocation);
@@ -2573,23 +2563,23 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
             if (columnLoc <= startAnew) {
                 add = new Text(jobTxtStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobStatusStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobNameStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobTypeStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobDateTxtStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
 
@@ -2598,7 +2588,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
 
                     add = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add.setStyle("-fx-font-size: 10;");
+                    add.setStyle("-fx-font-size: 9;");
                     gridpane.add(add, columnLoc, counter);
                     counter++;
 
@@ -2611,7 +2601,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
                     //system.out.println(strManip);
                     add = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add.setStyle("-fx-font-size: 10;");
+                    add.setStyle("-fx-font-size: 9;");
                     gridpane.add(add, columnLoc, counter);
                     counter++;
 
@@ -2640,11 +2630,11 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                         label33 = new Text("Work Type"),
                         label44 = new Text("Work Date");
 
-                label00.setStyle("-fx-font-size: 10;");
-                label11.setStyle("-fx-font-size: 10;");
-                label22.setStyle("-fx-font-size: 10;");
-                label33.setStyle("-fx-font-size: 10;");
-                label44.setStyle("-fx-font-size: 10;");
+                label00.setStyle("-fx-font-size: 9;");
+                label11.setStyle("-fx-font-size: 9;");
+                label22.setStyle("-fx-font-size: 9;");
+                label33.setStyle("-fx-font-size: 9;");
+                label44.setStyle("-fx-font-size: 9;");
 
                 gridpane.add(label00, 0, 15); // column=2 row=1        
                 gridpane.add(label11, 0, 16);  // column=3 row=1
@@ -2658,7 +2648,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                     row.setValignment(VPos.CENTER);
                     String nameLabel = "Person " + i;
                     Text tmpTxt = new Text(nameLabel);
-                    tmpTxt.setStyle("-fx-font-size: 10;");
+                    tmpTxt.setStyle("-fx-font-size: 9;");
 
                     gridpane.getRowConstraints().add(row);
                     gridpane.add(tmpTxt, 0, numLocation);
@@ -2673,7 +2663,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                     row.setValignment(VPos.CENTER);
                     String nameLabel = "Veh/Equip " + i;
                     Text tmpTxt = new Text(nameLabel);
-                    tmpTxt.setStyle("-fx-font-size: 10;");
+                    tmpTxt.setStyle("-fx-font-size: 9;");
 
                     gridpane.getRowConstraints().add(row);
                     gridpane.add(tmpTxt, 0, numLocation);
@@ -2700,23 +2690,23 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 Text add2;
 
                 add2 = new Text(jobTxtStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobStatusStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobNameStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobTypeStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobDateTxtStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
 
@@ -2724,7 +2714,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
                 while (strManip.lastIndexOf("/") >= 0) {
                     add2 = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add2.setStyle("-fx-font-size: 10;");
+                    add2.setStyle("-fx-font-size: 9;");
                     gridpane.add(add2, columnLoc2, counter);
                     counter++;
 
@@ -2736,7 +2726,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
                     //system.out.println(strManip);
                     add2 = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add2.setStyle("-fx-font-size: 10;");
+                    add2.setStyle("-fx-font-size: 9;");
                     gridpane.add(add2, columnLoc2, counter);
                     counter++;
 
@@ -2778,9 +2768,9 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 printScreen.setVisible(false);
                 Printer printer = Printer.getDefaultPrinter();
                 PrinterJob job = PrinterJob.createPrinterJob();
-                PageLayout pageLayout = printer.createPageLayout(Paper.LEGAL, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
+                PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
 
-                double scaleX = pageLayout.getPrintableWidth() / 1490;
+                double scaleX = pageLayout.getPrintableWidth() / 1200;
                 double scaleY = pageLayout.getPrintableHeight() / 680;
 
                 root.getTransforms().add(new Scale(scaleX, scaleY));
@@ -3574,169 +3564,211 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         } else if (jobStatus.getSelectionModel().isEmpty()) {
             displayMsg("Job Status Missing.");
             return;
-        } else if (jobNameStr.equals("")) {
-            displayMsg("Job Name Information Missing.");
+        } else {
+            System.out.println("continue");
+        }
+
+        /*else if (jobNameStr.equals("")) {
+         displayMsg("Job Name Information Missing.");
+         return;
+         } else if (custJobNumStr.equals("")) {
+         displayMsg("Cust Job No. Information Missing.");
+         return;
+         } else if (startDateStr.equals("")) {
+         displayMsg("Start Date Information Missing.");
+         return;
+         } 
+         */
+        // else {
+        status = jobStatus.getSelectionModel().selectedItemProperty().getValue().toString();
+
+        //UPDATE THE LOGGING DATABASE TABLE
+        String queryRunNow = "insert into edithistory (DateEdited, JobName,usrFname, usrLname, EmpEditorID,  description) "
+                + " values('" + dateTimeStamp + "','" + jobTitleStr + "',"
+                + "(select fname from employees where uid = " + empID + "),"
+                + "(select lname from employees where uid = " + empID + "),"
+                + empID + ",'Job Creation'"
+                + statusNew.getText() + ");";
+
+        //insert into database
+        Statement updateLog = null;
+
+        //make the connection
+        try {
+            conn = DriverManager.getConnection(url, userdb, passdb);
+
+            //set our session id and ip address in order to identify user
+            updateLog = conn.createStatement();
+
+            usrHistTable.setItems(populateHist());
+
+            int executeUpdate = updateLog.executeUpdate(queryRunNow);
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+
+        //compile job types 
+        for (int i = 0; i < taskTypeListStr.size(); i++) {
+            jobtypecompiled += "/" + taskTypeListStr.get(i);
+        }
+
+        //compile employees  
+        for (int j = 0; j < empListSelected.size(); j++) {
+            empCompiled += "/" + empListSelected.get(j);
+        }
+
+        //compile equipment  
+        for (int k = 0; k < vehList.size(); k++) {
+            equipCompiled += "/" + vehList.get(k);
+        }
+
+        if (cid.equals("")) {
+            displayMsg("Customer not selected.");
             return;
-        } else if (custJobNumStr.equals("")) {
-            displayMsg("Cust Job No. Information Missing.");
-            return;
-        } else if (startDateStr.equals("")) {
-            displayMsg("Start Date Information Missing.");
-            return;
-        }  
-        else {
-            status = jobStatus.getSelectionModel().selectedItemProperty().getValue().toString();
+        }
 
-            //UPDATE THE LOGGING DATABASE TABLE
-            String queryRunNow = "insert into edithistory (DateEdited, JobName,usrFname, usrLname, EmpEditorID,  description) "
-                    + " values('" + dateTimeStamp + "','" + jobTitleStr + "',"
-                    + "(select fname from employees where uid = " + empID + "),"
-                    + "(select lname from employees where uid = " + empID + "),"
-                    + empID + ",'Job Creation'"
-                    + statusNew.getText() + ");";
+        /*
+         if (equipCompiled.equals("")) {
+         displayMsg("Equipment Missing.");
+         return;
 
-            //insert into database
-            Statement updateLog = null;
+         }
+         else if (jobtypecompiled.equals("")) {
+         displayMsg("Job Type Missing.");
+         return;
 
-            //make the connection
-            try {
-                conn = DriverManager.getConnection(url, userdb, passdb);
+         } 
+         else if (empCompiled.equals("")) {
+         displayMsg("Employees Missing.");
+         return;
+         }
+         else if (cid.equals("")) {
+         displayMsg("Customer not selected.");
+         return;
+                
+         }*/
+            //else {
+        ////system.out.println("CID: " + cid);
+        ////system.out.println("Job name: " + jobNameStr);
+        ////system.out.println("Cust job #: " + custJobNumStr);
+        ////system.out.println("Cust job name: " + custJobNameStr);
+        ////system.out.println("start date: " + startDateStr);
+        ////system.out.println("start time: " + startTimeStr);
+        ////system.out.println("street: " + streetAddr.getText());
+        ////system.out.println("city: " + city.getText());
+        ////system.out.println("state: " + state.getText());
+        ////system.out.println("zip: " + zip.getText());
+            /*  //system.out.println("job type");
+         for (int i = 0; i < jobTypePicked.size(); i++) {
+         System.out.print(jobTypePicked.get(i));
+         System.out.print(",");
+         }
 
-                //set our session id and ip address in order to identify user
-                updateLog = conn.createStatement();
+         //system.out.println("equipment");
+         for (int i = 0; i < vehList.size(); i++) {
+         System.out.print(vehList.get(i));
+         System.out.print(",");
+         }
 
-                usrHistTable.setItems(populateHist());
-
-                int executeUpdate = updateLog.executeUpdate(queryRunNow);
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-
-            //compile job types 
-            for (int i = 0; i < taskTypeListStr.size(); i++) {
-                jobtypecompiled += "/" + taskTypeListStr.get(i);
-            }
-
-            //compile employees  
-            for (int j = 0; j < empListSelected.size(); j++) {
-                empCompiled += "/" + empListSelected.get(j);
-            }
-
-            //compile equipment  
-            for (int k = 0; k < vehList.size(); k++) {
-                equipCompiled += "/" + vehList.get(k);
-            }
-
+         //system.out.println("employees");
+         for (int i = 0; i < empListSel.size(); i++) {
+         //system.out.println(empListSel.get(i));
+         System.out.print(",");
+         }
+         //system.out.println("CID: " + cid);
+         */
+        if (status.equals("IN PROGRESS")) {
             if (equipCompiled.equals("")) {
                 displayMsg("Equipment Missing.");
                 return;
-
             } else if (jobtypecompiled.equals("")) {
                 displayMsg("Job Type Missing.");
                 return;
-
             } else if (empCompiled.equals("")) {
                 displayMsg("Employees Missing.");
                 return;
             } else if (cid.equals("")) {
                 displayMsg("Customer not selected.");
                 return;
-                
+            } else if (jobTitleStr.equals("")) {
+                displayMsg("Job Title Information Missing.");
+                return;
+            } else if (jobStatus.getSelectionModel().isEmpty()) {
+                displayMsg("Job Status Missing.");
+                return;
+            } else if (jobNameStr.equals("")) {
+                displayMsg("Job Name Information Missing.");
+                return;
+            } else if (custJobNumStr.equals("")) {
+                displayMsg("Cust Job No. Information Missing.");
+                return;
+            } else if (startDateStr.equals("")) {
+                displayMsg("Start Date Information Missing.");
+                return;
             } else {
-                ////system.out.println("CID: " + cid);
-                ////system.out.println("Job name: " + jobNameStr);
-                ////system.out.println("Cust job #: " + custJobNumStr);
-                ////system.out.println("Cust job name: " + custJobNameStr);
-                ////system.out.println("start date: " + startDateStr);
-                ////system.out.println("start time: " + startTimeStr);
-                ////system.out.println("street: " + streetAddr.getText());
-                ////system.out.println("city: " + city.getText());
-                ////system.out.println("state: " + state.getText());
-                ////system.out.println("zip: " + zip.getText());
-            /*  //system.out.println("job type");
-                 for (int i = 0; i < jobTypePicked.size(); i++) {
-                 System.out.print(jobTypePicked.get(i));
-                 System.out.print(",");
-                 }
-
-                 //system.out.println("equipment");
-                 for (int i = 0; i < vehList.size(); i++) {
-                 System.out.print(vehList.get(i));
-                 System.out.print(",");
-                 }
-
-                 //system.out.println("employees");
-                 for (int i = 0; i < empListSel.size(); i++) {
-                 //system.out.println(empListSel.get(i));
-                 System.out.print(",");
-                 }
-                 //system.out.println("CID: " + cid);
-                 */
-
-                if (status.equals("IN PROGRESS") && empCompiled.equals("")) {
-                    displayMsg("You must have employees assigned\nto an 'IN PROGRESS' job.");
-                    return;
-                }
-
-                String qry = "INSERT INTO currentjobs (CurJobID, Customer_CID, "
-                        + "CustJobNum, CustJobName, JobTitle, JobName, JobWorkDate, "
-                        + "JobStartTime, JobType, JobEmployees, JobEandV, S_Instr, "
-                        + "D_Instr, T_Instr, W_Instr, billing,status, jobSiteAddr,"
-                        + "jobCitySite, jobStateLoc, jobZipLoc,employeeID) "
-                        + "VALUES (NULL, '" + cid + "', '" + custJobNumStr + "', '" + custJobNameStr + "', '" + jobTitleStr
-                        + "', '" + jobNameStr + "', '" + startDateStr + "', '" + startTimeStr + "', '" + jobtypecompiled
-                        + "','" + empCompiled + "', '" + equipCompiled + "', '" + sI + "', '" + dI + "'"
-                        + ", '" + tI + "', '" + wI + "', '" + billing + "','" + status + "','" + streetAddr.getText() + "','"
-                        + city.getText() + "','" + state.getText() + "','" + zip.getText() + "'," + empID + ");";
-
-                //system.out.println("qry: " + qry);
-                //delete all entries associated with IP before exiting to the login screen
-                Statement updateDb = null;
-                updateDb = conn.createStatement();
-
-                //set our session id and ip address in order to identify user.
-                int executeUpdate = updateDb.executeUpdate(qry);
-
-                if (executeUpdate > 0) {
-                    //system.out.println("Database updated...");
-                    //show the complete box dialog
-                    Label label2;
-                    label2 = new Label("Job Successfully Added.");
-                    HBox hb2 = new HBox();
-                    Group root = new Group();
-
-                    Button closeWindow = new Button("Close");
-                    hb2.getChildren().addAll(label2, closeWindow);
-                    hb2.setSpacing(10);
-                    hb2.setLayoutX(25);
-                    hb2.setLayoutY(48);
-                    root.getChildren().add(hb2);
-
-                    final Scene scene2 = new Scene(root);
-                    final Stage stage2 = new Stage();
-
-                    stage2.close();
-                    stage2.setScene(scene2);
-                    stage2.setHeight(150);
-                    stage2.setWidth(310);
-                    stage2.setResizable(false);
-                    stage2.show();
-
-                    closeWindow.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent t) {
-                            taskList.getSelectionModel().select(1);
-                            clearJobList();
-                            CreateJobBox.setVisible(false);
-                            displayJobs.setVisible(true);
-
-                            stage2.close();
-                        }
-                    });
-
-                }
+                System.out.println("continue");
             }
         }
+
+        String qry = "INSERT INTO currentjobs (CurJobID, Customer_CID, "
+                + "CustJobNum, CustJobName, JobTitle, JobName, JobWorkDate, "
+                + "JobStartTime, JobType, JobEmployees, JobEandV, S_Instr, "
+                + "D_Instr, T_Instr, W_Instr, billing,status, jobSiteAddr,"
+                + "jobCitySite, jobStateLoc, jobZipLoc,employeeID) "
+                + "VALUES (NULL, '" + cid + "', '" + custJobNumStr + "', '" + custJobNameStr + "', '" + jobTitleStr
+                + "', '" + jobNameStr + "', '" + startDateStr + "', '" + startTimeStr + "', '" + jobtypecompiled
+                + "','" + empCompiled + "', '" + equipCompiled + "', '" + sI + "', '" + dI + "'"
+                + ", '" + tI + "', '" + wI + "', '" + billing + "','" + status + "','" + streetAddr.getText() + "','"
+                + city.getText() + "','" + state.getText() + "','" + zip.getText() + "'," + empID + ");";
+
+                //system.out.println("qry: " + qry);
+        //delete all entries associated with IP before exiting to the login screen
+        Statement updateDb = null;
+        updateDb = conn.createStatement();
+
+        //set our session id and ip address in order to identify user.
+        int executeUpdate = updateDb.executeUpdate(qry);
+
+        if (executeUpdate > 0) {
+                    //system.out.println("Database updated...");
+            //show the complete box dialog
+            Label label2;
+            label2 = new Label("Job Successfully Added.");
+            HBox hb2 = new HBox();
+            Group root = new Group();
+
+            Button closeWindow = new Button("Close");
+            hb2.getChildren().addAll(label2, closeWindow);
+            hb2.setSpacing(10);
+            hb2.setLayoutX(25);
+            hb2.setLayoutY(48);
+            root.getChildren().add(hb2);
+
+            final Scene scene2 = new Scene(root);
+            final Stage stage2 = new Stage();
+
+            stage2.close();
+            stage2.setScene(scene2);
+            stage2.setHeight(150);
+            stage2.setWidth(310);
+            stage2.setResizable(false);
+            stage2.show();
+
+            closeWindow.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent t) {
+                    taskList.getSelectionModel().select(1);
+                    clearJobList();
+                    CreateJobBox.setVisible(false);
+                    displayJobs.setVisible(true);
+
+                    stage2.close();
+                }
+            });
+
+        }
+                //}
+        //}
 
         //refreshVeh();
         clearJobEntriesNow();
@@ -3831,7 +3863,10 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             }
 
             String tmpStr = "", holder = "", tmpStr2 = "", tmpStr3;
-            tmpStr = listOfTasks.substring(1, listOfTasks.length());
+
+            if (!listOfTasks.equals("")) {
+                tmpStr = listOfTasks.substring(1, listOfTasks.length());
+            }
 
             //system.out.println("EMP SIZE: " + empLister.length());
             //system.out.println("VEH SIZE: " + vehLister.length());
@@ -4165,9 +4200,37 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
          System.out.print(",");
          }*/
         ////system.out.println("CID: " + cid);
-        if (status.equals("IN PROGRESS") && empCompiled.equals("")) {
-            displayMsg("You must have employees assigned\nto an 'IN PROGRESS' job.");
-            return;
+        if (status.equals("IN PROGRESS")) {
+           if (equipCompiled.equals("")) {
+                displayMsg("Equipment Missing.");
+                return;
+            } else if (jobtypecompiled.equals("")) {
+                displayMsg("Job Type Missing.");
+                return;
+            } else if (empCompiled.equals("")) {
+                displayMsg("Employees Missing.");
+                return;
+            } else if (cid.equals("")) {
+                displayMsg("Customer not selected.");
+                return;
+            } else if (jobTitleStr.equals("")) {
+                displayMsg("Job Title Information Missing.");
+                return;
+            } else if (jobStatus.getSelectionModel().isEmpty()) {
+                displayMsg("Job Status Missing.");
+                return;
+            } else if (jobNameStr.equals("")) {
+                displayMsg("Job Name Information Missing.");
+                return;
+            } else if (custJobNumStr.equals("")) {
+                displayMsg("Cust Job No. Information Missing.");
+                return;
+            } else if (startDateStr.equals("")) {
+                displayMsg("Start Date Information Missing.");
+                return;
+            } else {
+                System.out.println("continue");
+            }
         }
 
         String qry = "update currentjobs set "
@@ -4553,7 +4616,8 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
     }
 
     @FXML
-    private void usrDeleteAction(ActionEvent event) {
+    private void usrDeleteAction(ActionEvent event
+    ) {
         String usrToDelete = usersTable.getSelectionModel().selectedItemProperty().getValue().getUsername();
         String queryDelete = "DELETE FROM users WHERE userName = '" + usrToDelete + "'";
         ////system.out.println(queryDelete);
@@ -4577,7 +4641,8 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
     }
 
     @FXML
-    private void handlePasswdAction(ActionEvent event) {
+    private void handlePasswdAction(ActionEvent event
+    ) {
         //Creating a GridPane container
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
@@ -5162,7 +5227,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         BufferedImage bufferedImage = new BufferedImage(550, 400, BufferedImage.TYPE_INT_ARGB);
         BufferedImage image;
         //for Production -- administrator
-       // File file = new File("C:/Users/vangfc/Documents/job_board.jpg");
+        // File file = new File("C:/Users/vangfc/Documents/job_board.jpg");
         File file = new File("C:/Users/administrator/Documents/job_board.jpg");
         image = javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, bufferedImage);
         try {
@@ -5238,11 +5303,11 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         String dateToday = (dateFormat.format(cal.getTime()));
         Text labelDate = labelDate = new Text(dateToday);
 
-        label.setStyle("-fx-font-size: 10;");
-        label1.setStyle("-fx-font-size: 10;");
-        label2.setStyle("-fx-font-size: 10;");
-        label3.setStyle("-fx-font-size: 10;");
-        label4.setStyle("-fx-font-size: 10;");
+        label.setStyle("-fx-font-size: 9;");
+        label1.setStyle("-fx-font-size: 9;");
+        label2.setStyle("-fx-font-size: 9;");
+        label3.setStyle("-fx-font-size: 9;");
+        label4.setStyle("-fx-font-size: 9;");
 
         labelTitle.setStyle("-fx-font-size: 16;");
         labelTitle.setY(25);
@@ -5271,7 +5336,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             row.setValignment(VPos.CENTER);
             String nameLabel = "Person " + i;
             Text tmpTxt = new Text(nameLabel);
-            tmpTxt.setStyle("-fx-font-size: 10;");
+            tmpTxt.setStyle("-fx-font-size: 9;");
 
             gridpane.getRowConstraints().add(row);
             gridpane.add(tmpTxt, 0, numLocation);
@@ -5285,7 +5350,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             row.setValignment(VPos.CENTER);
             String nameLabel = "Veh/Equip " + i;
             Text tmpTxt = new Text(nameLabel);
-            tmpTxt.setStyle("-fx-font-size: 10;");
+            tmpTxt.setStyle("-fx-font-size: 9;");
 
             gridpane.getRowConstraints().add(row);
             gridpane.add(tmpTxt, 0, numLocation);
@@ -5319,23 +5384,23 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
             if (columnLoc <= startAnew) {
                 add = new Text(jobTxtStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobStatusStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobNameStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobTypeStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobDateTxtStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
 
@@ -5344,7 +5409,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
 
                     add = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add.setStyle("-fx-font-size: 10;");
+                    add.setStyle("-fx-font-size: 9;");
                     gridpane.add(add, columnLoc, counter);
                     counter++;
 
@@ -5357,7 +5422,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
                     //system.out.println(strManip);
                     add = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add.setStyle("-fx-font-size: 10;");
+                    add.setStyle("-fx-font-size: 9;");
                     gridpane.add(add, columnLoc, counter);
                     counter++;
 
@@ -5386,11 +5451,11 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                         label33 = new Text("Work Type"),
                         label44 = new Text("Work Date");
 
-                label00.setStyle("-fx-font-size: 10;");
-                label11.setStyle("-fx-font-size: 10;");
-                label22.setStyle("-fx-font-size: 10;");
-                label33.setStyle("-fx-font-size: 10;");
-                label44.setStyle("-fx-font-size: 10;");
+                label00.setStyle("-fx-font-size: 9;");
+                label11.setStyle("-fx-font-size: 9;");
+                label22.setStyle("-fx-font-size: 9;");
+                label33.setStyle("-fx-font-size: 9;");
+                label44.setStyle("-fx-font-size: 9;");
 
                 gridpane.add(label00, 0, 15); // column=2 row=1        
                 gridpane.add(label11, 0, 16);  // column=3 row=1
@@ -5404,7 +5469,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                     row.setValignment(VPos.CENTER);
                     String nameLabel = "Person " + i;
                     Text tmpTxt = new Text(nameLabel);
-                    tmpTxt.setStyle("-fx-font-size: 10;");
+                    tmpTxt.setStyle("-fx-font-size: 9;");
 
                     gridpane.getRowConstraints().add(row);
                     gridpane.add(tmpTxt, 0, numLocation);
@@ -5419,7 +5484,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                     row.setValignment(VPos.CENTER);
                     String nameLabel = "Veh/Equip " + i;
                     Text tmpTxt = new Text(nameLabel);
-                    tmpTxt.setStyle("-fx-font-size: 10;");
+                    tmpTxt.setStyle("-fx-font-size: 9;");
 
                     gridpane.getRowConstraints().add(row);
                     gridpane.add(tmpTxt, 0, numLocation);
@@ -5446,23 +5511,23 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 Text add2;
 
                 add2 = new Text(jobTxtStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobStatusStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobNameStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobTypeStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobDateTxtStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
 
@@ -5471,7 +5536,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
 
                     add2 = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add2.setStyle("-fx-font-size: 10;");
+                    add2.setStyle("-fx-font-size: 9;");
                     gridpane.add(add2, columnLoc2, counter);
                     counter++;
 
@@ -5484,7 +5549,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 while (strManip.lastIndexOf("/") >= 0) {
                     //system.out.println(strManip);
                     add2 = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add2.setStyle("-fx-font-size: 10;");
+                    add2.setStyle("-fx-font-size: 9;");
                     gridpane.add(add2, columnLoc2, counter);
                     counter++;
 
@@ -5507,13 +5572,12 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         root.getChildren().add(labelComp);
 
         root.getChildren().add(gridpane);
-        
-        Scene sceneToSnap = new Scene(root,1120,680);    
-        
+
+        Scene sceneToSnap = new Scene(root, 1120, 680);
+
         //WritableImage snapshot = root.snapshot(new SnapshotParameters(), null);
-        
         WritableImage snapshot = sceneToSnap.snapshot(null);
-        
+
         root.getChildren().add(new ImageView(snapshot));
         saveImage(snapshot);
 
@@ -5607,7 +5671,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                     }
 
                     //sendMail.Send(usrNameField.getText().toString(), pazz.getText().toString(), "bellis@videopipeservices.com", "", "Job Board Daily Mail", "Job board email.");
-                   // File file = new File("C:/Users/vangfc/Documents/job_board.jpg");
+                    // File file = new File("C:/Users/vangfc/Documents/job_board.jpg");
                     File file = new File("C:/Users/administrator/Documents/job_board.jpg");
                     file.delete();
 
@@ -6721,39 +6785,31 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         final Group root = new Group();
         Button printScreen = new Button("Print");
 
-
         Rectangle r = new Rectangle(0, 0, 1120, 40);
         r.setFill(Color.LIGHTGREY);
         r.strokeProperty().set(Color.GRAY);
-
 
         Rectangle r2 = new Rectangle(0, 42, 1120, 18);
         r2.setFill(Color.YELLOW);
         r2.strokeProperty().set(Color.YELLOW);
 
-
         Rectangle r3 = new Rectangle(0, 342, 1120, 18);
         r3.setFill(Color.YELLOW);
         r3.strokeProperty().set(Color.YELLOW);
 
-
         GridPane gridpane = new GridPane();
 
-
         String qry = "select * from currentjobs where status ='IN PROGRESS';";
-
 
         List<String> empListSort = new ArrayList<String>();
         List<String> equipListSort = new ArrayList<String>();
         String jobTxtStr = "", jobTypeStr = "", jobDateTxtStr = "", jobStatusStr = "",
                 empListStr = "", equipListStr = "", jobNameStr = "";
 
-
         //set location and build of grid pane...
         gridpane.setLayoutY(40);
         int startAnew = 9, empNumber = 0, vehNumber = 0, numLocation = 0, columnLoc = 0,
                 columnLoc2 = 1;
-
 
         //set location and build of grid pane...
         gridpane.setLayoutY(40);
@@ -6761,9 +6817,7 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             RowConstraints row = new RowConstraints(20);
             row.setValignment(VPos.CENTER);
 
-
             gridpane.getRowConstraints().add(row);
-
 
         }
         for (int i = 0; i < 10; i++) {
@@ -6771,7 +6825,6 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             column.setHalignment(HPos.CENTER);
             gridpane.getColumnConstraints().add(column);
         }
-
 
         // or convenience methods set more than one constraint at once...
         Text label = new Text("Job Number"),
@@ -6784,17 +6837,14 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal = Calendar.getInstance();
 
-
         String dateToday = (dateFormat.format(cal.getTime()));
         Text labelDate = labelDate = new Text(dateToday);
 
-
-        label.setStyle("-fx-font-size: 10;");
-        label1.setStyle("-fx-font-size: 10;");
-        label2.setStyle("-fx-font-size: 10;");
-        label3.setStyle("-fx-font-size: 10;");
-        label4.setStyle("-fx-font-size: 10;");
-
+        label.setStyle("-fx-font-size: 9;");
+        label1.setStyle("-fx-font-size: 9;");
+        label2.setStyle("-fx-font-size: 9;");
+        label3.setStyle("-fx-font-size: 9;");
+        label4.setStyle("-fx-font-size: 9;");
 
         labelTitle.setStyle("-fx-font-size: 16;");
         labelTitle.setY(25);
@@ -6808,7 +6858,6 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         printScreen.setLayoutX(265);
         printScreen.setLayoutY(7);
 
-
         gridpane.add(label, 0, 0); // column=2 row=1        
         gridpane.add(label1, 0, 1);  // column=3 row=1
         gridpane.add(label2, 0, 2); // column=1 row=1
@@ -6817,25 +6866,20 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         numLocation = 5;
         columnLoc = 1;
 
-
         gridpane.setGridLinesVisible(true);
-
 
         for (int i = 1; i <= 5; i++) {
             RowConstraints row = new RowConstraints(20);
             row.setValignment(VPos.CENTER);
             String nameLabel = "Person " + i;
             Text tmpTxt = new Text(nameLabel);
-            tmpTxt.setStyle("-fx-font-size: 10;");
-
+            tmpTxt.setStyle("-fx-font-size: 9;");
 
             gridpane.getRowConstraints().add(row);
             gridpane.add(tmpTxt, 0, numLocation);
 
-
             //increment to track which column we are at.
             numLocation++;
-
 
         }
         for (int i = 1; i <= 5; i++) {
@@ -6843,28 +6887,21 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             row.setValignment(VPos.CENTER);
             String nameLabel = "Veh/Equip " + i;
             Text tmpTxt = new Text(nameLabel);
-            tmpTxt.setStyle("-fx-font-size: 10;");
-
+            tmpTxt.setStyle("-fx-font-size: 9;");
 
             gridpane.getRowConstraints().add(row);
             gridpane.add(tmpTxt, 0, numLocation);
 
-
             //increment to track which column we are at.
             numLocation++;
 
-
         }
-
 
         rs = st.executeQuery(qry);
 
-
         while (rs.next()) {
 
-
             int counter = 0;
-
 
             jobTxtStr = rs.getString(5);
             jobTypeStr = rs.getString(9);
@@ -6874,92 +6911,75 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 jobTypeStr = jobTypeStr.substring(1, jobTypeStr.length());
             }
 
-
             jobDateTxtStr = rs.getString(7);
             jobStatusStr = rs.getString(17);
             jobNameStr = rs.getString(6);
             empListStr = rs.getString(10);
             equipListStr = rs.getString(11);
 
-
             Text add;
-
 
             if (columnLoc <= startAnew) {
                 add = new Text(jobTxtStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobStatusStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobNameStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobTypeStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
                 add = new Text(jobDateTxtStr);
-                add.setStyle("-fx-font-size: 10;");
+                add.setStyle("-fx-font-size: 9;");
                 gridpane.add(add, columnLoc, counter);
                 counter++;
 
-
                 String strManip = empListStr;
-
 
                 while (strManip.lastIndexOf("/") >= 0) {
 
-
                     add = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add.setStyle("-fx-font-size: 10;");
+                    add.setStyle("-fx-font-size: 9;");
                     gridpane.add(add, columnLoc, counter);
                     counter++;
 
-
                     strManip = strManip.substring(0, strManip.lastIndexOf("/"));
 
-
                 }
-
 
                 counter = 10;
                 strManip = equipListStr;
                 while (strManip.lastIndexOf("/") >= 0) {
                     //system.out.println(strManip);
                     add = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add.setStyle("-fx-font-size: 10;");
+                    add.setStyle("-fx-font-size: 9;");
                     gridpane.add(add, columnLoc, counter);
                     counter++;
-
 
                     strManip = strManip.substring(0, strManip.lastIndexOf("/"));
                     //system.out.println(strManip);
 
-
                 }
-
 
             } else {
 
-
                 counter = 15;
                 //system.out.println("TIME TO PRINT ANOTHER TABLE");
-
 
                 for (int i = 0; i < 14; i++) {
                     RowConstraints row = new RowConstraints(20);
                     row.setValignment(VPos.CENTER);
 
-
                     gridpane.getRowConstraints().add(row);
 
-
                 }
-
 
                 // or convenience methods set more than one constraint at once...
                 Text label00 = new Text("Job Number"),
@@ -6968,13 +6988,11 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                         label33 = new Text("Work Type"),
                         label44 = new Text("Work Date");
 
-
-                label00.setStyle("-fx-font-size: 10;");
-                label11.setStyle("-fx-font-size: 10;");
-                label22.setStyle("-fx-font-size: 10;");
-                label33.setStyle("-fx-font-size: 10;");
-                label44.setStyle("-fx-font-size: 10;");
-
+                label00.setStyle("-fx-font-size: 9;");
+                label11.setStyle("-fx-font-size: 9;");
+                label22.setStyle("-fx-font-size: 9;");
+                label33.setStyle("-fx-font-size: 9;");
+                label44.setStyle("-fx-font-size: 9;");
 
                 gridpane.add(label00, 0, 15); // column=2 row=1        
                 gridpane.add(label11, 0, 16);  // column=3 row=1
@@ -6983,44 +7001,35 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 gridpane.add(label44, 0, 19); // column=2 row=1
                 numLocation = 20;
 
-
                 for (int i = 1; i <= 5; i++) {
                     RowConstraints row = new RowConstraints(20);
                     row.setValignment(VPos.CENTER);
                     String nameLabel = "Person " + i;
                     Text tmpTxt = new Text(nameLabel);
-                    tmpTxt.setStyle("-fx-font-size: 10;");
-
+                    tmpTxt.setStyle("-fx-font-size: 9;");
 
                     gridpane.getRowConstraints().add(row);
                     gridpane.add(tmpTxt, 0, numLocation);
 
-
                     //increment to track which column we are at.
                     numLocation++;
 
-
                 }
-
 
                 for (int i = 1; i <= 5; i++) {
                     RowConstraints row = new RowConstraints(20);
                     row.setValignment(VPos.CENTER);
                     String nameLabel = "Veh/Equip " + i;
                     Text tmpTxt = new Text(nameLabel);
-                    tmpTxt.setStyle("-fx-font-size: 10;");
-
+                    tmpTxt.setStyle("-fx-font-size: 9;");
 
                     gridpane.getRowConstraints().add(row);
                     gridpane.add(tmpTxt, 0, numLocation);
 
-
                     //increment to track which column we are at.
                     numLocation++;
 
-
                 }
-
 
                 jobTxtStr = rs.getString(5);
                 jobTypeStr = rs.getString(9);
@@ -7030,77 +7039,65 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                     jobTypeStr = jobTypeStr.substring(1, jobTypeStr.length());
                 }
 
-
                 jobDateTxtStr = rs.getString(7);
                 jobStatusStr = rs.getString(17);
                 jobNameStr = rs.getString(6);
                 empListStr = rs.getString(10);
                 equipListStr = rs.getString(11);
 
-
                 Text add2;
 
-
                 add2 = new Text(jobTxtStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobStatusStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobNameStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobTypeStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
                 add2 = new Text(jobDateTxtStr);
-                add2.setStyle("-fx-font-size: 10;");
+                add2.setStyle("-fx-font-size: 9;");
                 gridpane.add(add2, columnLoc2, counter);
                 counter++;
 
-
                 String strManip = empListStr;
-
 
                 while (strManip.lastIndexOf("/") >= 0) {
 
-
                     add2 = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add2.setStyle("-fx-font-size: 10;");
+                    add2.setStyle("-fx-font-size: 9;");
                     gridpane.add(add2, columnLoc2, counter);
                     counter++;
 
-
                     strManip = strManip.substring(0, strManip.lastIndexOf("/"));
 
-
                 }
-
 
                 counter = 25;
                 strManip = equipListStr;
                 while (strManip.lastIndexOf("/") >= 0) {
                     //system.out.println(strManip);
                     add2 = new Text(strManip.substring(strManip.lastIndexOf("/") + 1, strManip.length()));
-                    add2.setStyle("-fx-font-size: 10;");
+                    add2.setStyle("-fx-font-size: 9;");
                     gridpane.add(add2, columnLoc2, counter);
                     counter++;
 
-
                     strManip = strManip.substring(0, strManip.lastIndexOf("/"));
                     //system.out.println(strManip);
-
 
                 }
                 columnLoc2++;
             }
             columnLoc++;
         }
-
 
         root.getChildren().add(r);
         root.getChildren().add(r2);
@@ -7112,13 +7109,11 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
         root.getChildren().add(gridpane);
 
-        
-        Scene sceneToSnap2 = new Scene(root,1120,680);    
-        
+        Scene sceneToSnap2 = new Scene(root, 1120, 680);
+
         //WritableImage snapshot = root.snapshot(new SnapshotParameters(), null);
-        
         WritableImage snapshot = sceneToSnap2.snapshot(null);
-        
+
         //WritableImage snapshot = root.snapshot(new SnapshotParameters(),null);
         root.getChildren().add(new ImageView(snapshot));
 
@@ -7135,7 +7130,6 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
         File file = new File(fileNameSaver);
 
-
         image = javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, bufferedImage);
         try {
             Graphics2D gd = (Graphics2D) image.getGraphics();
@@ -7143,12 +7137,10 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
             ImageIO.write(image, "png", file);
             displayMsg("Job board archived.");
 
-
         } catch (IOException ex) {
             displayMsg("Job board archive error.");
             System.err.print(ex);
         };
-
 
     }
 
@@ -7191,10 +7183,15 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
                 s22 = new Text(zip.getText().toString());
         Text s23;
 
+        String equipListViewStr = "";
+
+        for (int i = 0; i < vehList.size(); i++) {
+            equipListViewStr += vehList.get(i) + "\n";
+        }
         //text area boxes
         equipTxt.wrapTextProperty().set(true);
         equipTxt.setEditable(false);
-        equipTxt.setText(sInstr.getText().toString());
+        equipTxt.setText(equipListViewStr);
         equipTxt.setLayoutX(640);
         equipTxt.setLayoutY(270);
         equipTxt.setPrefHeight(135);
@@ -7562,9 +7559,9 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
 
                 Printer printer = Printer.getDefaultPrinter();
                 PrinterJob job = PrinterJob.createPrinterJob();
-                PageLayout pageLayout = printer.createPageLayout(Paper.LEGAL, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
+                PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
 
-                double scaleX = pageLayout.getPrintableWidth() / 1490;
+                double scaleX = pageLayout.getPrintableWidth() / 1200;
                 double scaleY = pageLayout.getPrintableHeight() / 680;
 
                 root.getTransforms().add(new Scale(scaleX, scaleY));
@@ -7583,41 +7580,37 @@ ObservableList<String> empModStuff = FXCollections.observableArrayList(empModSSt
         stageJob.show();
 
     }
-    
-    
+
     @FXML
-    private void updateEmpButAction(ActionEvent event) throws SQLException
-    {
+    private void updateEmpButAction(ActionEvent event) throws SQLException {
         String querySetVehRESET = "update employees set fname = '"
-                + empEditFname.getText().toString()+ "', lname = '"
+                + empEditFname.getText().toString() + "', lname = '"
                 + empEditLname.getText().toString() + "', address = '"
                 + empEditAddress.getText().toString() + "', phone = '"
                 + empEditPhone.getText().toString() + "', email = '"
-                + empEditEmail.getText().toString()                 
-                + "' where uid = "+allEmpInfo.get(5);
-        
-            //insert into database
-            Statement updateEmpStuff = null;
-            //make the connection
-            try {
-                conn = DriverManager.getConnection(url, userdb, passdb);
-                //set our session id and ip address in order to identify user.
-                updateEmpStuff = conn.createStatement();
- 
-                int executeUpdate = updateEmpStuff.executeUpdate(querySetVehRESET);
-                
-                refreshEmp();
-                employeeTable.setItems(populateDB());
-                
-                displayMsg("Employee information updated.");
- 
-            } catch (SQLException ex) {
-                Logger.getLogger(JobCenterController.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
- 
-    }
+                + empEditEmail.getText().toString()
+                + "' where uid = " + allEmpInfo.get(5);
 
-    
+        //insert into database
+        Statement updateEmpStuff = null;
+        //make the connection
+        try {
+            conn = DriverManager.getConnection(url, userdb, passdb);
+            //set our session id and ip address in order to identify user.
+            updateEmpStuff = conn.createStatement();
+
+            int executeUpdate = updateEmpStuff.executeUpdate(querySetVehRESET);
+
+            refreshEmp();
+            employeeTable.setItems(populateDB());
+
+            displayMsg("Employee information updated.");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JobCenterController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }

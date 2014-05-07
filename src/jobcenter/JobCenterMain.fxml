@@ -274,7 +274,7 @@
         </ToolBar>
       </children>
     </Pane>
-    <Pane fx:id="employeePane" blendMode="DIFFERENCE" layoutX="278.0" layoutY="122.0" prefHeight="532.0" prefWidth="876.0" visible="true">
+    <Pane fx:id="employeePane" blendMode="DIFFERENCE" layoutX="278.0" layoutY="122.0" prefHeight="532.0" prefWidth="876.0" visible="false">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x3" height="655.0" layoutX="-79.0" layoutY="-68.0" stroke="BLACK" strokeType="INSIDE" width="1126.0" />
         <TabPane layoutX="-75.0" layoutY="-68.0" prefHeight="608.0" prefWidth="1082.0" tabClosingPolicy="UNAVAILABLE">
@@ -612,7 +612,7 @@
         </Accordion>
       </children>
     </Pane>
-    <Pane fx:id="proposalsPane" blendMode="DIFFERENCE" layoutX="200.0" layoutY="54.0" prefHeight="607.0" prefWidth="1065.0" visible="false">
+    <Pane fx:id="proposalsPane" blendMode="DIFFERENCE" layoutX="200.0" layoutY="54.0" prefHeight="607.0" prefWidth="1065.0" visible="true">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x3" height="640.0" layoutX="-1.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="1163.0" />
       </children>
